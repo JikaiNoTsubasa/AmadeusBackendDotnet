@@ -15,7 +15,7 @@ public class UnitController : AmaController
     }
 
     [HttpGet]
-    [Route("/units")]
+    [Route("/unit")]
     public IActionResult FetchUnitList(){
         try
         {
@@ -34,7 +34,7 @@ public class UnitController : AmaController
     }
 
     [HttpPost]
-    [Route("/units")]
+    [Route("/unit")]
     public IActionResult CreateUnit([FromForm] RequestCreateUnit model){
         try
         {

@@ -13,4 +13,14 @@ public static class DTOHelper
             Name = unit.Name
         };
     }
+
+    public static ResponseUser ToDTO(this AmaUser user)
+    {
+        return new ResponseUser
+        {
+            Id = user.Id,
+            Login = user.Login,
+            DisplayName = user.DisplayName
+        };
+    }
 }
