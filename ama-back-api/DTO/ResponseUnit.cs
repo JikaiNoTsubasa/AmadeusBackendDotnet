@@ -6,4 +6,6 @@ public record ResponseUnit
 {
     public long Id { get; set; }
     public string? Name { get; set; }
+    public ResponseStatus? Status { get; set; }
+    public DateTime? CreationDate { get; set; }
 }

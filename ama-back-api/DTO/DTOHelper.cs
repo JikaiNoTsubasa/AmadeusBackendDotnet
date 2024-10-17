@@ -10,7 +10,9 @@ public static class DTOHelper
         return new ResponseUnit
         {
             Id = unit.Id,
-            Name = unit.Name
+            Name = unit.Name,
+            CreationDate = unit.CreationDate,
+            Status = unit.Status?.ToDTO()
         };
     }
 
@@ -21,6 +23,16 @@ public static class DTOHelper
             Id = user.Id,
             Login = user.Login,
             DisplayName = user.DisplayName
+        };
+    }
+
+    public static ResponseStatus ToDTO(this AmaStatus status)
+    {
+        return new ResponseStatus
+        {
+            Id = status.Id,
+            Name = status.Name,
+            Description = status.Description
         };
     }
 }
