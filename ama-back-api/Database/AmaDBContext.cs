@@ -23,4 +23,16 @@ public class AmaDBContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var configBuilder = new ConfigurationBuilder()
+            .AddJsonFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json"));
+        
+        IConfiguration Config = configBuilder.Build();
+        string connectionString = Config.GetConnectionString("Default") ?? "";
+
+        string centralConnectionString = Config.GetConnectionString("Default") ?? "";
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    }
 }
