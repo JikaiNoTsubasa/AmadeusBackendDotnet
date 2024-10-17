@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ama_back_api</RootNamespace>
+    <NoWarn>$(NoWarn);CS8981</NoWarn><!-- Dissable warning for names in migration files -->
   </PropertyGroup>
 
   <ItemGroup>

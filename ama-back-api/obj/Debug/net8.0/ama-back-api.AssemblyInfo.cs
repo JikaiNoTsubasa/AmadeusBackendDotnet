@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ama-back-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2531ceb9727b78290c9fe63d90974f3fa7fc60be")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f56b27506cdc83d2256f268a5d5ddf19da38dce")]
 [assembly: System.Reflection.AssemblyProductAttribute("ama-back-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ama-back-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

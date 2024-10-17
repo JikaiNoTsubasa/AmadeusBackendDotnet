@@ -12,8 +12,8 @@ using ama_back_api.Database;
 namespace ama_back_api.Migrations
 {
     [DbContext(typeof(AmaDBContext))]
-    [Migration("20241017073716_Init")]
-    partial class Init
+    [Migration("20241017085239_entitydate")]
+    partial class entitydate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,6 +66,9 @@ namespace ama_back_api.Migrations
                         .HasColumnType("bigint");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -136,9 +139,6 @@ namespace ama_back_api.Migrations
             modelBuilder.Entity("ama_back_api.DBModels.AmaProject", b =>
                 {
                     b.HasBaseType("ama_back_api.DBModels.AmaEntity");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");

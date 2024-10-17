@@ -13,4 +13,5 @@ public class AmaEntity
     public long StatusId { get; set; }
     public AmaStatus? Status { get; set; }
     public IEnumerable<AmaCategory>? Categories { get; set; }
+    public DateTime CreationDate { get; set; } = DateTime.Now;
 }

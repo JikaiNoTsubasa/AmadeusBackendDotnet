@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ama_back_api.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class entitydate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -79,11 +79,11 @@ namespace ama_back_api.Migrations
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StatusId = table.Column<long>(type: "bigint", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Discriminator = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     UnitId = table.Column<long>(type: "bigint", nullable: true),
                     ProjectId = table.Column<long>(type: "bigint", nullable: true),
                     ParentTaskId = table.Column<long>(type: "bigint", nullable: true)

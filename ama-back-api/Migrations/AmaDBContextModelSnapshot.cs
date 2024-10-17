@@ -64,6 +64,9 @@ namespace ama_back_api.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(13)
@@ -133,9 +136,6 @@ namespace ama_back_api.Migrations
             modelBuilder.Entity("ama_back_api.DBModels.AmaProject", b =>
                 {
                     b.HasBaseType("ama_back_api.DBModels.AmaEntity");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");

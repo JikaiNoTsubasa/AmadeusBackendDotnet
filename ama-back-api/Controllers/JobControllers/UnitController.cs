@@ -1,7 +1,9 @@
 using System;
 using ama_back_api.Database;
+using ama_back_api.DBModels;
 using ama_back_api.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ama_back_api.Controllers.JobControllers;
 
@@ -17,9 +19,35 @@ public class UnitController : AmaController
     public IActionResult FetchUnitList(){
         try
         {
-            return StatusCode(StatusCodes.Status200OK, _context.Units.Select(u => u.ToDTO()).ToList());
+            return StatusCode(
+                StatusCodes.Status200OK, 
+                _context.Units
+                    .Include(u=>u.Status)
+                    .Include(u=>u.Categories)
+                    .Include(u=>u.Projects)
+                    .Select(u => u.ToDTO())
+                    .ToList()
+            );
         }catch(Exception e){
             return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get unit list."+e.Message);
+        }
+    }
+
+    [HttpPost]
+    [Route("/units")]
+    public IActionResult CreateUnit([FromForm] RequestCreateUnit model){
+        try
+        {
+            AmaUnit unit = new()
+            {
+                Name = model.Name,
+                StatusId = model.StatusId
+            };
+            _context.Units.Add(unit);
+            _context.SaveChanges();
+            return StatusCode(StatusCodes.Status201Created, unit.ToDTO());
+        }catch(Exception e){
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to create unit {model.Name}."+e.Message);
         }
     }
 }
