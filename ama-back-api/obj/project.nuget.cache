@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "g+GBUQBFL38=",
+  "dgSpecHash": "O/4cMYDPDrY=",
   "success": true,
   "projectFilePath": "C:\\Users\\biehler_s2i-evolutio\\Documents\\Projects\\Amadeus\\GitProject\\AmadeusBackendDotnet\\ama-back-api\\ama-back-api.csproj",
   "expectedPackageFiles": [
@@ -48,7 +48,10 @@
     "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\system.reflection.metadata\\6.0.1\\system.reflection.metadata.6.0.1.nupkg.sha512",
     "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
-    "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm64\\8.0.8\\microsoft.netcore.app.runtime.linux-arm64.8.0.8.nupkg.sha512",
+    "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm64\\8.0.8\\microsoft.aspnetcore.app.runtime.linux-arm64.8.0.8.nupkg.sha512",
+    "C:\\Users\\biehler_s2i-evolutio\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm64\\8.0.8\\microsoft.netcore.app.host.linux-arm64.8.0.8.nupkg.sha512"
   ],
   "logs": []
 }

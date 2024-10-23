@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ama-back-api.props" />
+</Project>
