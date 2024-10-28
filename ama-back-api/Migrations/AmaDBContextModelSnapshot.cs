@@ -82,7 +82,7 @@ namespace ama_back_api.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("Entities");
+                    b.ToTable("AmaEntity");
 
                     b.HasDiscriminator().HasValue("AmaEntity");
 

@@ -12,8 +12,8 @@ using ama_back_api.Database;
 namespace ama_back_api.Migrations
 {
     [DbContext(typeof(AmaDBContext))]
-    [Migration("20241017085239_entitydate")]
-    partial class entitydate
+    [Migration("20241028163231_fullschema")]
+    partial class fullschema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,7 @@ namespace ama_back_api.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("Entities");
+                    b.ToTable("AmaEntity");
 
                     b.HasDiscriminator().HasValue("AmaEntity");
 

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ama_back_api.Migrations
 {
     /// <inheritdoc />
-    public partial class entitydate : Migration
+    public partial class fullschema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,7 +71,7 @@ namespace ama_back_api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Entities",
+                name: "AmaEntity",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -90,27 +90,27 @@ namespace ama_back_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entities", x => x.Id);
+                    table.PrimaryKey("PK_AmaEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Entities_Entities_ParentTaskId",
+                        name: "FK_AmaEntity_AmaEntity_ParentTaskId",
                         column: x => x.ParentTaskId,
-                        principalTable: "Entities",
+                        principalTable: "AmaEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Entities_Entities_ProjectId",
+                        name: "FK_AmaEntity_AmaEntity_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "Entities",
+                        principalTable: "AmaEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Entities_Entities_UnitId",
+                        name: "FK_AmaEntity_AmaEntity_UnitId",
                         column: x => x.UnitId,
-                        principalTable: "Entities",
+                        principalTable: "AmaEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Entities_Status_StatusId",
+                        name: "FK_AmaEntity_Status_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Status",
                         principalColumn: "Id",
@@ -129,15 +129,15 @@ namespace ama_back_api.Migrations
                 {
                     table.PrimaryKey("PK_AmaCategoryAmaEntity", x => new { x.CategoriesId, x.EntitiesId });
                     table.ForeignKey(
-                        name: "FK_AmaCategoryAmaEntity_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
-                        principalTable: "Categories",
+                        name: "FK_AmaCategoryAmaEntity_AmaEntity_EntitiesId",
+                        column: x => x.EntitiesId,
+                        principalTable: "AmaEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AmaCategoryAmaEntity_Entities_EntitiesId",
-                        column: x => x.EntitiesId,
-                        principalTable: "Entities",
+                        name: "FK_AmaCategoryAmaEntity_Categories_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -149,23 +149,23 @@ namespace ama_back_api.Migrations
                 column: "EntitiesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entities_ParentTaskId",
-                table: "Entities",
+                name: "IX_AmaEntity_ParentTaskId",
+                table: "AmaEntity",
                 column: "ParentTaskId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entities_ProjectId",
-                table: "Entities",
+                name: "IX_AmaEntity_ProjectId",
+                table: "AmaEntity",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entities_StatusId",
-                table: "Entities",
+                name: "IX_AmaEntity_StatusId",
+                table: "AmaEntity",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entities_UnitId",
-                table: "Entities",
+                name: "IX_AmaEntity_UnitId",
+                table: "AmaEntity",
                 column: "UnitId");
         }
 
@@ -179,10 +179,10 @@ namespace ama_back_api.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "AmaEntity");
 
             migrationBuilder.DropTable(
-                name: "Entities");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Status");
