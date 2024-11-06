@@ -12,8 +12,8 @@ using ama_back_api.Database;
 namespace ama_back_api.Migrations
 {
     [DbContext(typeof(AmaDBContext))]
-    [Migration("20241028163231_fullschema")]
-    partial class fullschema
+    [Migration("20241106130834_cat")]
+    partial class cat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,11 +70,6 @@ namespace ama_back_api.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("varchar(13)");
-
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
@@ -85,11 +80,9 @@ namespace ama_back_api.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("AmaEntity");
+                    b.ToTable("AmaEntity", (string)null);
 
-                    b.HasDiscriminator().HasValue("AmaEntity");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaStatus", b =>
@@ -148,7 +141,7 @@ namespace ama_back_api.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.HasDiscriminator().HasValue("AmaProject");
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaTask", b =>
@@ -165,14 +158,14 @@ namespace ama_back_api.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.HasDiscriminator().HasValue("AmaTask");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaUnit", b =>
                 {
                     b.HasBaseType("ama_back_api.DBModels.AmaEntity");
 
-                    b.HasDiscriminator().HasValue("AmaUnit");
+                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("AmaCategoryAmaEntity", b =>
@@ -203,6 +196,12 @@ namespace ama_back_api.Migrations
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaProject", b =>
                 {
+                    b.HasOne("ama_back_api.DBModels.AmaEntity", null)
+                        .WithOne()
+                        .HasForeignKey("ama_back_api.DBModels.AmaProject", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ama_back_api.DBModels.AmaUnit", "Unit")
                         .WithMany("Projects")
                         .HasForeignKey("UnitId")
@@ -214,6 +213,12 @@ namespace ama_back_api.Migrations
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaTask", b =>
                 {
+                    b.HasOne("ama_back_api.DBModels.AmaEntity", null)
+                        .WithOne()
+                        .HasForeignKey("ama_back_api.DBModels.AmaTask", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ama_back_api.DBModels.AmaTask", "ParentTask")
                         .WithMany("SubTasks")
                         .HasForeignKey("ParentTaskId")
@@ -229,6 +234,15 @@ namespace ama_back_api.Migrations
                     b.Navigation("ParentTask");
 
                     b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("ama_back_api.DBModels.AmaUnit", b =>
+                {
+                    b.HasOne("ama_back_api.DBModels.AmaEntity", null)
+                        .WithOne()
+                        .HasForeignKey("ama_back_api.DBModels.AmaUnit", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaStatus", b =>

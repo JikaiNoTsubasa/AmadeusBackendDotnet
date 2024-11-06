@@ -10,6 +10,7 @@ builder.Logging.AddLog4Net();
 
 ILog log = LogManager.GetLogger(typeof(Program));
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<AmaDBContext>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -9,5 +9,5 @@ public class AmaCategory
     public long Id { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
-    public IEnumerable<AmaEntity>? Entities { get; set; }
+    public ICollection<AmaEntity>? Entities { get; set; }
 }

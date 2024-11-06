@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ama_back_api.Database;
 
@@ -11,9 +12,11 @@ using ama_back_api.Database;
 namespace ama_back_api.Migrations
 {
     [DbContext(typeof(AmaDBContext))]
-    partial class AmaDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241106130634_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace ama_back_api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("AmaCategoryAmaEntity", b =>
-                {
-                    b.Property<long>("CategoriesId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("EntitiesId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("CategoriesId", "EntitiesId");
-
-                    b.HasIndex("EntitiesId");
-
-                    b.ToTable("AmaCategoryAmaEntity");
-                });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaCategory", b =>
                 {
@@ -163,21 +151,6 @@ namespace ama_back_api.Migrations
                     b.HasBaseType("ama_back_api.DBModels.AmaEntity");
 
                     b.ToTable("Units");
-                });
-
-            modelBuilder.Entity("AmaCategoryAmaEntity", b =>
-                {
-                    b.HasOne("ama_back_api.DBModels.AmaCategory", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ama_back_api.DBModels.AmaEntity", null)
-                        .WithMany()
-                        .HasForeignKey("EntitiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaEntity", b =>

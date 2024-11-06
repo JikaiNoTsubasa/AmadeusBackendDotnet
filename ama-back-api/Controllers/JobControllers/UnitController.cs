@@ -23,7 +23,6 @@ public class UnitController : AmaController
                 StatusCodes.Status200OK, 
                 _context.Units
                     .Include(u=>u.Status)
-                    .Include(u=>u.Categories)
                     .Include(u=>u.Projects)
                     .Select(u => u.ToDTO())
                     .ToList()
@@ -42,7 +41,6 @@ public class UnitController : AmaController
                 StatusCodes.Status200OK, 
                 _context.Units
                     .Include(u=>u.Status)
-                    .Include(u=>u.Categories)
                     .Include(u=>u.Projects)
                     .FirstOrDefault(u => u.Id == id)?
                     .ToDTO() ?? throw new Exception("Unit not found")

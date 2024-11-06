@@ -26,11 +26,11 @@ public class AmaDBContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        /*
-        modelBuilder.Entity<AmaEntity>()
-            .Property(b => b.CreationDate)
-            .HasDefaultValueSql("now()");
-            */
+        
+        modelBuilder.Entity<AmaEntity>().UseTptMappingStrategy().ToTable("AmaEntity");
+        modelBuilder.Entity<AmaEntity>().HasKey(e => e.Id);
+        modelBuilder.Entity<AmaEntity>().Property(e => e.Id).ValueGeneratedOnAdd();
+        modelBuilder.Entity<AmaEntity>().HasOne(e => e.Status).WithMany(s => s.Entities);
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
