@@ -14,4 +14,5 @@ public abstract class AmaEntity
     public AmaStatus? Status { get; set; }
     public DateTime CreationDate { get; set; } = DateTime.Now;
     public ICollection<AmaCategory>? Categories { get; set; }
+    public string? Icon { get; set; }
 }
