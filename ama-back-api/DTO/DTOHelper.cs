@@ -13,7 +13,8 @@ public static class DTOHelper
             Id = model.Id,
             Name = model.Name,
             CreationDate = model.CreationDate,
-            Status = model.Status?.ToDTO()
+            Status = model.Status?.ToDTO(),
+            Icon = model.Icon
         };
     }
 
