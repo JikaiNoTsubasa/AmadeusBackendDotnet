@@ -33,7 +33,7 @@ public class UnitController : AmaController
     }
 
     [HttpGet]
-    [Route("/unit/{id}")]
+    [Route("/unit/{id:long}")]
     public IActionResult FetchUnitById([FromRoute] long id){
         try
         {
@@ -43,6 +43,24 @@ public class UnitController : AmaController
                     .Include(u=>u.Status)
                     .Include(u=>u.Projects)
                     .FirstOrDefault(u => u.Id == id)?
+                    .ToDTO() ?? throw new Exception("Unit not found")
+            );
+        }catch(Exception e){
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get unit list. "+e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("/unit/first")]
+    public IActionResult FetchFirstUnit(){
+        try
+        {
+            return StatusCode(
+                StatusCodes.Status200OK, 
+                _context.Units
+                    .Include(u=>u.Status)
+                    .Include(u=>u.Projects)
+                    .First()?
                     .ToDTO() ?? throw new Exception("Unit not found")
             );
         }catch(Exception e){

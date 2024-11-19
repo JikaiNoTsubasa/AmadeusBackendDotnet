@@ -24,7 +24,8 @@ public static class DTOHelper
         {
             Id = model.Id,
             Login = model.Login,
-            DisplayName = model.DisplayName
+            DisplayName = model.DisplayName,
+            AvatarPath = model.AvatarPath
         };
     }
 
