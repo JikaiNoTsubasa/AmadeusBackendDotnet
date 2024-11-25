@@ -14,7 +14,8 @@ public static class DTOHelper
             Name = model.Name,
             CreationDate = model.CreationDate,
             Status = model.Status?.ToDTO(),
-            Icon = model.Icon
+            Icon = model.Icon,
+            Projects = model.Projects?.Select(p=>p.ToDTO()).ToList()
         };
     }
 

@@ -14,6 +14,13 @@ public class UnitController : AmaController
     {
     }
 
+    public IQueryable<AmaUnit> GenerateUnitQuery(){
+        return _context.Units
+            .Include(u=>u.Status)
+            .Include(u=>u.Projects)
+            ;
+    }
+
     [HttpGet]
     [Route("/unit")]
     public IActionResult FetchUnitList(){
@@ -21,9 +28,8 @@ public class UnitController : AmaController
         {
             return StatusCode(
                 StatusCodes.Status200OK, 
-                _context.Units
-                    .Include(u=>u.Status)
-                    .Include(u=>u.Projects)
+                GenerateUnitQuery()
+                .Where(u => u.Status.Name != "Archived" && u.Status.Name != "Deleted")
                     .Select(u => u.ToDTO())
                     .ToList()
             );
@@ -39,9 +45,7 @@ public class UnitController : AmaController
         {
             return StatusCode(
                 StatusCodes.Status200OK, 
-                _context.Units
-                    .Include(u=>u.Status)
-                    .Include(u=>u.Projects)
+                GenerateUnitQuery()
                     .FirstOrDefault(u => u.Id == id)?
                     .ToDTO() ?? throw new Exception("Unit not found")
             );
@@ -56,10 +60,8 @@ public class UnitController : AmaController
         try
         {
             return StatusCode(
-                StatusCodes.Status200OK, 
-                _context.Units
-                    .Include(u=>u.Status)
-                    .Include(u=>u.Projects)
+                StatusCodes.Status200OK,
+                GenerateUnitQuery()
                     .First()?
                     .ToDTO() ?? throw new Exception("Unit not found")
             );

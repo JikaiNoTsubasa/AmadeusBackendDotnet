@@ -8,4 +8,5 @@ public record class RequestCreateProject
     public DateTime? CreationDate { get; set; }
     public List<ResponseCategory>? Categories { get; set; }
     public string? Description { get; set; }
+    public long UnitId { get; set; }
 }

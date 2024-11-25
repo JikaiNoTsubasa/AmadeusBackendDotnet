@@ -11,7 +11,7 @@ public abstract class AmaEntity
     public string? Name { get; set; }
     [ForeignKey(nameof(Status))]
     public long StatusId { get; set; }
-    public AmaStatus? Status { get; set; }
+    public AmaStatus Status { get; set; } = null!;
     public DateTime CreationDate { get; set; } = DateTime.Now;
     public ICollection<AmaCategory>? Categories { get; set; }
     public string? Icon { get; set; }

@@ -9,4 +9,5 @@ public record ResponseUnit
     public string? Icon { get; set; }
     public ResponseStatus? Status { get; set; }
     public DateTime? CreationDate { get; set; }
+    public ICollection<ResponseProject>? Projects { get; set; }
 }

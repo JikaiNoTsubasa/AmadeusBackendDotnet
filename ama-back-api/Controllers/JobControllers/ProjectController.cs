@@ -21,7 +21,7 @@ public class ProjectController(AmaDBContext context) : AmaController(context)
     [Route("/project")]
     public IActionResult FetchProjectList(){
         try{
-            IEnumerable<ResponseProject> projects = GenerateProjectQuery().Select(p => p.ToDTO()).ToList();
+            IEnumerable<ResponseProject> projects = [.. GenerateProjectQuery().Where(p => p.Status.Name != "Archived" && p.Status.Name != "Deleted").Select(p => p.ToDTO())];
             return StatusCode(StatusCodes.Status200OK, projects);
         }catch(Exception e){
             return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get project list. "+e.Message);
@@ -45,7 +45,9 @@ public class ProjectController(AmaDBContext context) : AmaController(context)
             AmaProject project = new()
             {
                 Name = model.Name,
-                StatusId = model.StatusId
+                Description = model.Description,
+                UnitId = model.UnitId,
+                StatusId = 1 // Created
             };
             _context.Projects.Add(project);
             _context.SaveChanges();

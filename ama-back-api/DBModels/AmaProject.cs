@@ -9,7 +9,7 @@ public class AmaProject : AmaEntity
     [ForeignKey(nameof(Unit))]
     public long UnitId { get; set; }
     public AmaUnit? Unit { get; set; }
-    public IEnumerable<AmaTask>? Tasks { get; set; }
+    public ICollection<AmaTask>? Tasks { get; set; }
 
     [NotMapped]
     public float Progress { get; set; }
