@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using ama_back_api.Database;
 using ama_back_api.DBModels;
 using ama_back_api.DTO;
@@ -14,6 +15,7 @@ public class UnitController : AmaController
     {
     }
 
+    [NonAction]
     public IQueryable<AmaUnit> GenerateUnitQuery(){
         return _context.Units
             .Include(u=>u.Status)
