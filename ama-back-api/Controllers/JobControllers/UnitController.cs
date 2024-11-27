@@ -57,6 +57,22 @@ public class UnitController : AmaController
     }
 
     [HttpGet]
+    [Route("/unit/project/{id:long}")]
+    public IActionResult FetchUnitByProjectId([FromRoute] long id){
+        try
+        {
+            return StatusCode(
+                StatusCodes.Status200OK, 
+                GenerateUnitQuery()
+                    .Where(u => u.Projects!.Any(p => p.Id == id))
+                    .First().ToDTO()
+            );
+        }catch(Exception e){
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get unit list. "+e.Message);
+        }
+    }
+
+    [HttpGet]
     [Route("/unit/first")]
     public IActionResult FetchFirstUnit(){
         try

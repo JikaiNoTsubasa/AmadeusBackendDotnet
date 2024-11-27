@@ -59,4 +59,16 @@ public static class DTOHelper
             Name = model.Name
         };
     }
+
+    public static ResponseTask ToDTO(this AmaTask model){
+        return new ResponseTask
+        {
+            Id = model.Id,
+            Name = model.Name,
+            CreationDate = model.CreationDate,
+            Status = model.Status?.ToDTO(),
+            Categories = model.Categories?.Select(c=>c.ToDTO()).ToList(),
+            Project = model.Project?.ToDTO()
+        };
+    }
 }
