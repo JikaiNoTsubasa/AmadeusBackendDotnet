@@ -37,6 +37,22 @@ public class TaskController(AmaDBContext context) : AmaController(context)
         }
     }
 
+    [HttpGet]
+    [Route("/task/{id:long}")]
+    public IActionResult FetchTaskById([FromRoute] long id){
+        try
+        {
+            return StatusCode(
+                StatusCodes.Status200OK, 
+                GenerateTaskQuery()
+                    .FirstOrDefault(t => t.Id == id)?
+                    .ToDTO() ?? throw new Exception($"Task not found with id {id}")
+            );
+        }catch(Exception e){
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get task {id}. "+e.Message);
+        }
+    }
+
     [HttpPost]
     [Route("/task")]
     public IActionResult CreateTask([FromBody] RequestCreateTaskForm model){

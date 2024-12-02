@@ -68,7 +68,8 @@ public static class DTOHelper
             CreationDate = model.CreationDate,
             Status = model.Status?.ToDTO(),
             Categories = model.Categories?.Select(c=>c.ToDTO()).ToList(),
-            Project = model.Project?.ToDTO()
+            Project = model.Project?.ToDTO(),
+            Content = model.Content
         };
     }
 }
