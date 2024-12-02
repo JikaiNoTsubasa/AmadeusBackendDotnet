@@ -29,7 +29,7 @@ public class TaskController(AmaDBContext context) : AmaController(context)
                 StatusCodes.Status200OK, 
                 GenerateTaskQuery()
                     .Where(t => t.ProjectId == id)?
-                    .Where(t => t.Status.Name != "Archived" && t.Status.Name != "Deleted")
+                    .Where(t => t.Status.Name != "Archived" && t.Status.Name != "Closed")
                     .Select(t => t.ToDTO()) ?? throw new Exception("Unit not found")
             );
         }catch(Exception e){
@@ -72,6 +72,24 @@ public class TaskController(AmaDBContext context) : AmaController(context)
             return StatusCode(StatusCodes.Status201Created, task.ToDTO());
         }catch(Exception e){
             return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to create task {model.Name}."+e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("/task/{id:long}")]
+    public IActionResult UpdateTask([FromRoute] long id, [FromBody] RequestUpdateTask model){
+        try
+        {
+            AmaTask task = GenerateTaskQuery().FirstOrDefault(t => t.Id == id) ?? throw new Exception($"Task not found with id {id}");
+            task.Name = model.Name ?? task.Name;
+            task.StatusId = model.StatusId ?? task.StatusId;
+            task.ProjectId = model.ProjectId ?? task.ProjectId;
+            task.ParentTaskId = model.ParentTaskId ?? task.ParentTaskId;
+            task.Content = model.Content ?? task.Content;
+            _context.SaveChanges();
+            return StatusCode(StatusCodes.Status200OK, task.ToDTO());
+        }catch(Exception e){
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to update task {id}."+e.Message);
         }
     }
 }
