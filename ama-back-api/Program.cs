@@ -14,10 +14,14 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<AmaDBContext>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 //builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews(
     o=>o.ModelBinderProviders.Insert(0, new FromJsonBinderProvider())
 );
+
+// Disables the string conversions from empty to null
+builder.Services.AddMvc().AddMvcOptions(options => options.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider()));
 
 
 var app = builder.Build();

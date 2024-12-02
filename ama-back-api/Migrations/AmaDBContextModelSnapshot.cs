@@ -148,7 +148,10 @@ namespace ama_back_api.Migrations
                 {
                     b.HasBaseType("ama_back_api.DBModels.AmaEntity");
 
-                    b.Property<long>("ParentTaskId")
+                    b.Property<string>("Content")
+                        .HasColumnType("longtext");
+
+                    b.Property<long?>("ParentTaskId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("ProjectId")
@@ -221,9 +224,7 @@ namespace ama_back_api.Migrations
 
                     b.HasOne("ama_back_api.DBModels.AmaTask", "ParentTask")
                         .WithMany("SubTasks")
-                        .HasForeignKey("ParentTaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ParentTaskId");
 
                     b.HasOne("ama_back_api.DBModels.AmaProject", "Project")
                         .WithMany("Tasks")

@@ -10,6 +10,7 @@ public class AmaTask : AmaEntity
     public AmaProject? Project { get; set; }
     public ICollection<AmaTask>? SubTasks { get; set; }
     [ForeignKey(nameof(ParentTask))]
-    public long ParentTaskId { get; set; }
+    public long? ParentTaskId { get; set; }
     public AmaTask? ParentTask { get; set; }
+    public string? Content { get; set; }
 }

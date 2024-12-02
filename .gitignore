@@ -1,3 +1,4 @@
 appsettings*.json
 ama-back-api/obj/
 ama-back-api/bin/
+Migrations/
