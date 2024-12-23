@@ -58,14 +58,13 @@ public class TaskController(AmaDBContext context) : AmaController(context)
     public IActionResult CreateTask([FromBody] RequestCreateTaskForm model){
         try
         {
-            Debug.WriteLine($"Creating task with name: {model.Name}, project: {model.ProjectId}, parent: {model.ParentTaskId}, content: {model.Content}");
+            Debug.WriteLine($"Creating task with name: {model.Name}, project: {model.ProjectId}, content: {model.Content}");
             AmaTask task = new()
             {
                 Name = model.Name,
                 StatusId = model.StatusId
             };
             if (model.ProjectId is not null) task.ProjectId = model.ProjectId.Value;
-            if (model.ParentTaskId is not null) task.ParentTaskId = model.ParentTaskId.Value;
             if (model.Content is not null) task.Content = model.Content;
             _context.Tasks.Add(task);
             _context.SaveChanges();
@@ -84,7 +83,6 @@ public class TaskController(AmaDBContext context) : AmaController(context)
             task.Name = model.Name ?? task.Name;
             task.StatusId = model.StatusId ?? task.StatusId;
             task.ProjectId = model.ProjectId ?? task.ProjectId;
-            task.ParentTaskId = model.ParentTaskId ?? task.ParentTaskId;
             task.Content = model.Content ?? task.Content;
             _context.SaveChanges();
             return StatusCode(StatusCodes.Status200OK, task.ToDTO());

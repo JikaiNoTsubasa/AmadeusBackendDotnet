@@ -151,13 +151,8 @@ namespace ama_back_api.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("ParentTaskId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("ProjectId")
                         .HasColumnType("bigint");
-
-                    b.HasIndex("ParentTaskId");
 
                     b.HasIndex("ProjectId");
 
@@ -222,17 +217,11 @@ namespace ama_back_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ama_back_api.DBModels.AmaTask", "ParentTask")
-                        .WithMany("SubTasks")
-                        .HasForeignKey("ParentTaskId");
-
                     b.HasOne("ama_back_api.DBModels.AmaProject", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ParentTask");
 
                     b.Navigation("Project");
                 });
@@ -254,11 +243,6 @@ namespace ama_back_api.Migrations
             modelBuilder.Entity("ama_back_api.DBModels.AmaProject", b =>
                 {
                     b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("ama_back_api.DBModels.AmaTask", b =>
-                {
-                    b.Navigation("SubTasks");
                 });
 
             modelBuilder.Entity("ama_back_api.DBModels.AmaUnit", b =>
